@@ -9,16 +9,16 @@ function Results({ movies }) {
             <Row>
                 <Col size="col-6">
                     {movies.map(movie => (
-                        <Row>
-                            <Col size="col-2">
+                        <Row key={movie.imdbID}>
+                            <Col size="offset-4 col-2">
                                 {movie.Poster === "N/A" ?
-                                    <img src="https://via.placeholder.com/150x200" alt="Poster" /> :
+                                    <img src="https://via.placeholder.com/100x150" alt="Poster" /> :
                                     <img src={movie.Poster} alt="Poster" />}
                             </Col>
-                            
                             <Col size="col-6">
-                                <h2>Title: {movie.Title}</h2>
-                                <h3>Title: {movie.Year}</h3>
+                                <p>Title: {movie.Title} ({movie.Year})</p>
+                                <button data-id={movie.imdbID}>Nominate</button>
+                                
                             </Col>
                         </Row>
                     ))}
@@ -27,8 +27,6 @@ function Results({ movies }) {
                     Im here
                 </Col>
             </Row>
-
-
         </div>
     )
 }

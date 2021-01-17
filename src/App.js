@@ -10,7 +10,8 @@ function App() {
   // const [formInput, setFormInput] = useState([]);
 
 
-  function search() {
+  function search(e) {
+    e.preventDefault();
     API.searchMovie("Rambo")
       .then(res => {
         if (res === undefined || res.data.Response === "False") {
@@ -29,8 +30,7 @@ function App() {
   return (
     <div className="App">
       <Title />
-      <Form />
-      <button onClick={() => search()}>search</button>
+      <Form search={search}/>
       <Results movies={movies} />
     </div>
   );
