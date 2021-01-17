@@ -2,8 +2,8 @@ import React from "react"
 import Col from "./Col"
 import Row from "./Row"
 
-function Results({ movies }) {
-
+function Results({ movies, nominate, nominated }) {
+    console.log(nominated);
     return (
         <div className="results">
             <Row>
@@ -17,13 +17,26 @@ function Results({ movies }) {
                             </Col>
                             <Col size="col-6">
                                 <p>Title: {movie.Title} ({movie.Year})</p>
-                                <button data-id={movie.imdbID}>Nominate</button>
-                                
+                                <button onClick={nominate} data-id={movie.imdbID}>Nominate</button>
+
                             </Col>
                         </Row>
                     ))}
                 </Col>
                 <Col size="col-6">
+                    {nominated.map(nominatedMovie => (
+                        <Row key={nominatedMovie.imdbID}>
+                            <Col size="offset-4 col-2">
+                                {nominatedMovie.Poster === "N/A" ?
+                                    <img src="https://via.placeholder.com/100x150" alt="Poster" /> :
+                                    <img src={nominatedMovie.Poster} alt="Poster" />}
+                            </Col>
+                            <Col size="col-6">
+                                <p>Title: {nominatedMovie.Title} ({nominatedMovie.Year})</p>
+                                <button onClick={nominate} data-id={nominatedMovie.imdbID}>Nominate</button>
+                            </Col>
+                        </Row>
+                    ))}
                     Im here
                 </Col>
             </Row>
