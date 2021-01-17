@@ -9,9 +9,6 @@ function App() {
   const [movies, setMovies] = useState([]);
   // const [formInput, setFormInput] = useState([]);
 
-  useEffect(() => {
-    console.log(movies);
-  }, [movies])
 
   function search() {
     API.searchMovie("Rambo")
@@ -21,6 +18,7 @@ function App() {
         }
         else {
           setMovies(res.data.Search)
+          console.log(res.data.Search);
         }
       })
   }

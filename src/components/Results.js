@@ -11,8 +11,11 @@ function Results({ movies }) {
                     {movies.map(movie => (
                         <Row>
                             <Col size="col-2">
-                                <img src={movie.Poster} alt="Poster" />
+                                {movie.Poster === "N/A" ?
+                                    <img src="https://via.placeholder.com/150x200" alt="Poster" /> :
+                                    <img src={movie.Poster} alt="Poster" />}
                             </Col>
+                            
                             <Col size="col-6">
                                 <h2>Title: {movie.Title}</h2>
                                 <h3>Title: {movie.Year}</h3>
