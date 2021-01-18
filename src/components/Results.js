@@ -5,13 +5,17 @@ import Row from "./Row"
 function Results({ movies, nominate, nominated, deleteMovie }) {
 
     movies.forEach(movie => {
-        if (nominated.some(elem => elem.imdbID === movie.imdbID)) {
-            console.log("same movie");
-            document.querySelector("#nominate[data-id=" + movie.imdbID +"]").disabled = true;
+        const nominateButton = document.querySelector("#nominate[data-id=" + movie.imdbID + "]")
+        if (nominateButton) {
+            // if movie is nominated, disable button
+            if (nominated.some(elem => elem.imdbID === movie.imdbID)) {
+                nominateButton.disabled = true;
+            }
+            else {
+                nominateButton.disabled = false;
+            }
         }
-        else {
-            document.querySelector("#nominate[data-id=" + movie.imdbID +"]").disabled = false;
-        }
+
     });
 
     return (

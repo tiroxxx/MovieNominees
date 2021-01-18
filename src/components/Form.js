@@ -1,11 +1,10 @@
 import React from "react";
 import Input from "./Input";
 
-function Form({ search }) {
+function Form({ search, handleInputChange }) {
     return (
         <form className="text-center">
-            <Input type="text" value="Search for a Movie!" />
-            <button onClick={search}>search</button>
+            <Input handleInputChange={handleInputChange} type="text" value="Search for a Movie!" />
         </form>
     )
 }

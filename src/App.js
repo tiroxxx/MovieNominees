@@ -1,28 +1,28 @@
 import './App.css';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Title from "./components/Title";
 import Form from "./components/Form";
 import API from "./utils/API";
 import Results from "./components/Results";
-import NominatedMovies from "./components/Nominated"
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [nominated, setNominated] = useState([]);
-  // const [formInput, setFormInput] = useState([]);
 
+  function search(keyword) {
+    console.log(keyword);
+    if (keyword.trim() !== "") {
+      API.searchMovie(keyword)
+        .then(res => {
+          if (res === undefined || res.data.Response === "False") {
+            console.log("not found");
+          }
+          else {
+            setMovies(res.data.Search)
+          }
+        })
+    }
 
-  function search(e) {
-    e.preventDefault();
-    API.searchMovie("Rambo")
-      .then(res => {
-        if (res === undefined || res.data.Response === "False") {
-          console.log("not found");
-        }
-        else {
-          setMovies(res.data.Search)
-        }
-      })
   }
 
   function nominate(e) {
@@ -43,11 +43,19 @@ function App() {
     setNominated(arr);
   }
 
+  function handleInputChange(e) {
+    const keyword = e.target.value
+    if(keyword === "") {
+      document.querySelector(".results").textContent = ""
+    }
+    search(keyword);
+  }
+
 
   return (
     <div className="App">
       <Title />
-      <Form search={search} />
+      <Form search={search} handleInputChange={handleInputChange} />
       <Results movies={movies}
         nominate={nominate}
         nominated={nominated}

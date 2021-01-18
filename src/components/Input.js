@@ -1,9 +1,8 @@
 import React from "react";
 
-function Input({ type, value }) {
+function Input({ type, value, handleInputChange }) {
     return (
-        <input type={type} value={value} />
-        
+        <input onChange={handleInputChange} type={type} placeholder={value} />
     )
 }
 
