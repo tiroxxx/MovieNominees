@@ -33,9 +33,15 @@ function App() {
     movie.push(movies.find(x => x.imdbID === movieID));
     console.log(movie);
     setNominated(movie)
-
   }
 
+  function deleteMovie(e) {
+    e.preventDefault();
+    const movieID = e.target.getAttribute("data-id");
+    // filter out the deleted movie
+    const arr = nominated.filter(movie => (movie.imdbID !== movieID))
+    setNominated(arr);
+  }
 
 
   return (
@@ -44,7 +50,8 @@ function App() {
       <Form search={search} />
       <Results movies={movies}
         nominate={nominate}
-        nominated={nominated} />
+        nominated={nominated}
+        deleteMovie={deleteMovie} />
     </div>
   );
 }

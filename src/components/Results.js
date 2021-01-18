@@ -2,8 +2,14 @@ import React from "react"
 import Col from "./Col"
 import Row from "./Row"
 
-function Results({ movies, nominate, nominated }) {
-    console.log(nominated);
+function Results({ movies, nominate, nominated, deleteMovie }) {
+
+    // movies.forEach(movie => {
+    //     if (nominated.some(elem => elem.imdbID === movie.imdbID))
+    //         console.log(movie.Title +" is nominated");
+    //         return 
+    // });
+
     return (
         <div className="results">
             <Row>
@@ -33,7 +39,7 @@ function Results({ movies, nominate, nominated }) {
                             </Col>
                             <Col size="col-6">
                                 <p>Title: {nominatedMovie.Title} ({nominatedMovie.Year})</p>
-                                <button onClick={nominate} data-id={nominatedMovie.imdbID}>Nominate</button>
+                                <button onClick={deleteMovie} data-id={nominatedMovie.imdbID}>Delete</button>
                             </Col>
                         </Row>
                     ))}
