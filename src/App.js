@@ -15,11 +15,13 @@ function App() {
       API.searchMovie(keyword)
         .then(res => {
           if (res === undefined || res.data.Response === "False") {
-            console.log("not found");
+            
           }
           else {
             setMovies(res.data.Search)
           }
+        }).catch(err => {
+          if(err) throw err;
         })
     }
 
@@ -45,8 +47,8 @@ function App() {
 
   function handleInputChange(e) {
     const keyword = e.target.value
-    if(keyword === "") {
-      document.querySelector(".results").textContent = ""
+    if (keyword === "") {
+      setMovies([]);
     }
     search(keyword);
   }
@@ -55,7 +57,7 @@ function App() {
   return (
     <div className="App">
       <Title />
-      <Form search={search} handleInputChange={handleInputChange} />
+      <Form handleInputChange={handleInputChange} />
       <Results movies={movies}
         nominate={nominate}
         nominated={nominated}
