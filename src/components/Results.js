@@ -4,11 +4,15 @@ import Row from "./Row"
 
 function Results({ movies, nominate, nominated, deleteMovie }) {
 
-    // movies.forEach(movie => {
-    //     if (nominated.some(elem => elem.imdbID === movie.imdbID))
-    //         console.log(movie.Title +" is nominated");
-    //         return 
-    // });
+    movies.forEach(movie => {
+        if (nominated.some(elem => elem.imdbID === movie.imdbID)) {
+            console.log("same movie");
+            document.querySelector("#nominate[data-id=" + movie.imdbID +"]").disabled = true;
+        }
+        else {
+            document.querySelector("#nominate[data-id=" + movie.imdbID +"]").disabled = false;
+        }
+    });
 
     return (
         <div className="results">
@@ -23,7 +27,7 @@ function Results({ movies, nominate, nominated, deleteMovie }) {
                             </Col>
                             <Col size="col-6">
                                 <p>Title: {movie.Title} ({movie.Year})</p>
-                                <button onClick={nominate} data-id={movie.imdbID}>Nominate</button>
+                                <button id="nominate" onClick={nominate} data-id={movie.imdbID}>Nominate</button>
 
                             </Col>
                         </Row>
@@ -43,7 +47,6 @@ function Results({ movies, nominate, nominated, deleteMovie }) {
                             </Col>
                         </Row>
                     ))}
-                    Im here
                 </Col>
             </Row>
         </div>
